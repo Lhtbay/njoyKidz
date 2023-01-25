@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1456627958565501460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1456627958565501482}
+  - component: {fileID: 1456627958565501483}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1456627958565501482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456627958565501460}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1456627958565501483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456627958565501460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 856420a10e1262e4389e3be80fa7a062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _obstaclePrefab: {fileID: 6236267097491557656, guid: 1a028c2aafb13da429aad3f87128d8f2,
+    type: 3}
+  _obstaclesParent: {fileID: 0}
+  _greenBoxPrefab: {fileID: 4375135034643962974, guid: c29ff8e5f2fdfa94bb9f3c9c7344db0d,
+    type: 3}
+  _greenBoxParent: {fileID: 0}
+  _listAllObjects: []
+  _listCoins:
+  - {fileID: 197819351911321968, guid: 3109187cd43c1c646be457b89823ded7, type: 3}
+  - {fileID: 3188924191153486767, guid: 726aeaa78e3bc6049b0bc515e1ff634e, type: 3}
+  - {fileID: 915488730421395308, guid: 55ad050e99153e84f8acd6a66d515f4c, type: 3}
+  - {fileID: 8993791370965385931, guid: 38a93c8dd29b1f842b251684ac11aba6, type: 3}
+  - {fileID: 6130076534926374753, guid: d70e5b8833e75f14e937eaaea37a023f, type: 3}

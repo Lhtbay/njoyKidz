@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Obstacle
+  - GreenBox
+  - Coin2
+  - Coin3
+  - Coin4
+  - Coin1
+  - Coin5
   layers:
   - Default
   - TransparentFX

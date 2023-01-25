@@ -8,16 +8,19 @@ public class CharacterController : MonoBehaviour
 
     [SerializeField] private Vector3 _moveRight;
     [SerializeField] private Vector3 _moveFront;
-    private Vector3 _nextPosition;
+    private Vector3 _nextPosition,_nextPosition2;
     private Vector3 _startPosition;
     private Vector3 _difference;
    
     private bool _canMove,_canDiagonalMove = false;
     private bool _canPressA,_canPressS,_canPressD,_canPressW = true;
+    private bool _coinCompletedTextOneTime,_gameOverTextOneTime = false;
 
     private float _timer,_timer2 = 0;
     private float _moveTime = 0.5f;
     private float _percentToMove;
+
+    private int _coinCount = 1;
 
     private Animator _thisAnimator;
 
@@ -40,7 +43,25 @@ public class CharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CheckGameOver();
+        if (!_gameOverTextOneTime)
+        {
+            CheckGameOver();
+        }
+        if (!_coinCompletedTextOneTime)
+        {
+            CheckCoins();
+        }
+        
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Coin"+_coinCount.ToString())
+        {
+            collision.gameObject.SetActive(false);
+            _coinCount++;
+        }
     }
 
     #region Controls Methods
@@ -54,8 +75,9 @@ public class CharacterController : MonoBehaviour
             if (Input.GetKey(KeyCode.A))
             {
                 if (_canPressA)
-                {
+                {                   
                     _nextPosition -= _moveRight;
+                    _nextPosition2 = _nextPosition - _moveRight;
                     _canPressA = false;
                 }                
                 _canDiagonalMove = true;                                             
@@ -65,6 +87,7 @@ public class CharacterController : MonoBehaviour
                 if (_canPressS)
                 {
                     _nextPosition -= _moveFront;
+                    _nextPosition2 = _nextPosition - _moveFront;
                     _canPressS = false;
                 }              
                 _canDiagonalMove = true;
@@ -74,6 +97,7 @@ public class CharacterController : MonoBehaviour
                 if (_canPressD)
                 {
                     _nextPosition += _moveRight;
+                    _nextPosition2 = _nextPosition + _moveRight;
                     _canPressD = false;
                 }               
                 _canDiagonalMove = true;
@@ -83,14 +107,34 @@ public class CharacterController : MonoBehaviour
                 if (_canPressW)
                 {
                     _nextPosition += _moveFront;
+                    _nextPosition2 = _nextPosition + _moveFront;
                     _canPressW = false;
                 }               
                 _canDiagonalMove = true;
-            }
+            }           
             if (_canDiagonalMove && _timer2 >= 0.1f)
             {
-                ControllerCheckSysthem();
-            }
+                if (!GameManager.Instance.CheckTileIsFull(_nextPosition, _nextPosition2))
+                {
+                    ControllerCheckSysthem();
+                    print("Current Position : "+_nextPosition);
+                }
+                else
+                {
+                    print("!!! Cant Move Because Tile Is Full !!!");
+                    _nextPosition = transform.position;
+
+                    _canDiagonalMove = false;
+                    _canMove = false;
+
+                    _canPressA = true;
+                    _canPressD = true;
+                    _canPressS = true;
+                    _canPressW = true;
+
+                    _timer2 = 0;                   
+                }
+            }         
         }
        
     }
@@ -107,9 +151,7 @@ public class CharacterController : MonoBehaviour
 
         _canDiagonalMove = false;
         
-        _timer2 = 0;
-        _timer = 0;
-
+        _timer2 = 0;        
     }
 
     private void DiagonalCheckSysthem()
@@ -129,8 +171,20 @@ public class CharacterController : MonoBehaviour
             transform.position.y < -5.5f)
         {
             _thisAnimator.SetBool("GameOver",true);
+            print("!!! Game Over !!!");
+
+            _gameOverTextOneTime = true;
         }
       
+    }
+
+    private void CheckCoins()
+    {
+        if (_coinCount > 5)
+        {
+            print("!!! Coins Level Is Completed !!!");
+            _coinCompletedTextOneTime = true;
+        }
     }
 
     #endregion
@@ -139,15 +193,15 @@ public class CharacterController : MonoBehaviour
     private void MoveSysthem()
     {
         if (_canMove)
-        {                    
+        {          
             _timer += Time.deltaTime;
             _percentToMove = _timer / _moveTime;
             transform.position = _startPosition + _difference * _percentToMove;
 
             if (_timer >= 0.5f)
             {
-                _canMove = false;
-                _timer = 0;
+                _canMove = false;               
+                _timer = 0;               
             }
 
             
