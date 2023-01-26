@@ -39,6 +39,7 @@ public class CharacterController : MonoBehaviour
         ControllerStsythem();
         DiagonalCheckSysthem();
         MoveSysthem();
+        LineRendererSysthem();
     }
 
     private void FixedUpdate()
@@ -70,6 +71,8 @@ public class CharacterController : MonoBehaviour
     {
         if (!_canMove)
         {
+            transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
+
             _startPosition = transform.position;
 
             if (Input.GetKey(KeyCode.A))
@@ -116,14 +119,14 @@ public class CharacterController : MonoBehaviour
             {
                 if (!GameManager.Instance.CheckTileIsFull(_nextPosition, _nextPosition2))
                 {
+                    _canMove = true;
                     ControllerCheckSysthem();
-                    print("Current Position : "+_nextPosition);
+                    print("Current Position : "+_nextPosition);                                
                 }
                 else
                 {
                     print("!!! Cant Move Because Tile Is Full !!!");
-                    _nextPosition = transform.position;
-
+                    
                     _canDiagonalMove = false;
                     _canMove = false;
 
@@ -132,18 +135,32 @@ public class CharacterController : MonoBehaviour
                     _canPressS = true;
                     _canPressW = true;
 
+                    _nextPosition = transform.position;
                     _timer2 = 0;                   
                 }
             }         
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _startPosition = new Vector3((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
+            GameManager.Instance.CheckPlug(_startPosition);
+            GameManager.Instance.CheckOutlet(_startPosition);
+        }
        
+    }
+
+    private void LineRendererSysthem()
+    {
+        if (GameManager.Instance.HavePlug)
+        {          
+            GameManager.Instance.HaveLineRenderer.GetComponent<LineRenderer>().SetPosition(GameManager.Instance.HaveLineRenderer.GetComponent<LineRenderer>().positionCount - 1, transform.position); 
+        }     
     }
 
     private void ControllerCheckSysthem()
     {       
         _difference = _nextPosition - transform.position;
-
-        _canMove = true;
+        
         _canPressA = true;
         _canPressD = true;
         _canPressS = true;
@@ -200,14 +217,16 @@ public class CharacterController : MonoBehaviour
 
             if (_timer >= 0.5f)
             {
+                if (GameManager.Instance.HavePlug)
+                {
+                    GameManager.Instance.HaveLineRenderer.GetComponent<LineRenderer>().positionCount++;
+                    GameManager.Instance.HaveLineRenderer.GetComponent<LineRenderer>().SetPosition(GameManager.Instance.HaveLineRenderer.GetComponent<LineRenderer>().positionCount-1, _nextPosition);     
+                }
                 _canMove = false;               
                 _timer = 0;               
-            }
-
-            
+            }          
         }
     }
-
 
     #endregion
 

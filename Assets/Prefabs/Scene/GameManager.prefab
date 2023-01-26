@@ -46,10 +46,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obstaclePrefab: {fileID: 6236267097491557656, guid: 1a028c2aafb13da429aad3f87128d8f2,
     type: 3}
-  _obstaclesParent: {fileID: 0}
   _greenBoxPrefab: {fileID: 4375135034643962974, guid: c29ff8e5f2fdfa94bb9f3c9c7344db0d,
     type: 3}
+  _lineRendererPrefabs: {fileID: 6187979559822262553, guid: 511c02348c186f341aff51bd8301e244,
+    type: 3}
+  _lineRendererParent: {fileID: 0}
+  _obstaclesParent: {fileID: 0}
   _greenBoxParent: {fileID: 0}
+  _plugsAndOutletParent: {fileID: 0}
+  _coinsParent: {fileID: 0}
   _listAllObjects: []
   _listCoins:
   - {fileID: 197819351911321968, guid: 3109187cd43c1c646be457b89823ded7, type: 3}
@@ -57,3 +62,13 @@ MonoBehaviour:
   - {fileID: 915488730421395308, guid: 55ad050e99153e84f8acd6a66d515f4c, type: 3}
   - {fileID: 8993791370965385931, guid: 38a93c8dd29b1f842b251684ac11aba6, type: 3}
   - {fileID: 6130076534926374753, guid: d70e5b8833e75f14e937eaaea37a023f, type: 3}
+  _listGreenBox: []
+  _listLineRenderer: []
+  _listPlugAndOutlet:
+  - {fileID: 8224718815904458472, guid: 3b50fe9d99c66394c81a0618e41ab438, type: 3}
+  - {fileID: 4502583904048063447, guid: a95f34988cf48da4289e69369c433c4e, type: 3}
+  - {fileID: 5211979054693402669, guid: b25158717eec92f4f8a4cf4fdab16049, type: 3}
+  - {fileID: 669701364658776437, guid: d79722aa036a59347ad78425ab587c10, type: 3}
+  - {fileID: 4542841828432398907, guid: de3f835d64f6c7f4b9ab1b168352959a, type: 3}
+  - {fileID: 6607780370616221409, guid: 1de13059cf3ad244382a04f1d7de4f30, type: 3}
+  _listActiveGreenBox: 

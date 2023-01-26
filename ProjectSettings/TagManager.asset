@@ -11,6 +11,9 @@ TagManager:
   - Coin4
   - Coin1
   - Coin5
+  - LineRenderer
+  - Plug
+  - Outlet
   layers:
   - Default
   - TransparentFX
